@@ -61,19 +61,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/motivational/
-    - assets/images/alone/
-    - assets/images/relationship/
-    - assets/images/birthday/
-    - assets/images/goodmorning/
-    - assets/images/goodnight/
-    - assets/images/friendship/
-    - assets/images/fitness/
-    - assets/images/love/
-    - assets/images/sad/
-    - assets/images/travel/
-    - assets/images/attitude/
-    - assets/images/anniversary/
-    
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

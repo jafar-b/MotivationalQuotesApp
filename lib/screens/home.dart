@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
+import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 // import 'package:motivationalquotesapp/screens/Others.dart';
 
 class home extends StatefulWidget {
@@ -72,31 +73,113 @@ class _homeState extends State<home> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+
       appBar: appBar(),
+      drawer:  Drawer(child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          // Header
+          DrawerHeader(
+            child: Center(
+              child: Text(
+                'Motivational Quotes     -Jafar',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+
+          // List items
+          ListTile(
+            leading: Icon(Icons.create),
+            title: Text('Create Quote'),
+            onTap: () {
+              // Navigate to the create quote screen
+              Navigator.pushNamed(context, '/create-quote');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text('My Creations'),
+            onTap: () {
+              // Navigate to the my creations screen
+              Navigator.pushNamed(context, '/my-creations');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.download),
+            title: Text('Downloads'),
+            onTap: () {
+              // Navigate to the downloads screen
+              Navigator.pushNamed(context, '/downloads');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text('Favorites'),
+            onTap: () {
+              // Navigate to the favorites screen
+              Navigator.pushNamed(context, '/favorites');
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.facebook),
+            title: Text('Like us on Facebook'),
+            onTap: () {
+              // Open the Facebook page in the browser
+              // TODO: Implement this
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.facebook),
+            title: Text('Follow us on Instagram'),
+            onTap: () {
+              // Open the Instagram page in the browser
+              // TODO: Implement this
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              // Navigate to the settings screen
+              Navigator.pushNamed(context, '/settings');
+            },
+          ),
+          // Your other drawer items
+        ],
+      )
+      ),
+
+      
       body: IndexedStack(
         index: _currentScreen,
         children: [
           grid(),
           Others(),
-      
         ],
       ),
     );
+
   }
 
   Widget grid() {
     return GestureDetector(
       child: GridView.count(
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
         primary: false,
         padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
+        crossAxisCount: 2,                   
         children: list
             .map((e) => ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  e,
+                  e,              
                   fit: BoxFit.fitHeight,
                 )))
             .toList(),
@@ -137,35 +220,36 @@ class _homeState extends State<home> {
               },            
               child: Text(
                 "Others",
-
                 style: TextStyle(
                     fontSize: buttonSize,
                     color: _currentScreen == 1
                         ? Colors.deepPurpleAccent
                         : Colors.black),
               )),
-          IconButton(onPressed: () {
+          IconButton(
+            icon: Icon(Icons.attach_money, size:30),
+            onPressed: () {
+              print("Pushed") ;
+              Navigator.pushNamed(context, '/premiumfeatures');
 
-          }, icon: Icon(Icons.menu))
+            },
+
+          ),
         ],
       ),
-      leading: IconButton(
-        icon: Icon(Icons.attach_money, size: 30),
-        onPressed: () {},
-      ),
+      
     );
   }
 }
 
 class Others extends StatelessWidget {
   const Others({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         body:
         GridView.count(
+          padding: EdgeInsets.all(10),
             crossAxisCount: 2,
             children: [
               // Button 1
@@ -176,14 +260,14 @@ class Others extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => alone()));
                 },
                 icon: Icon(Icons.person_outline),
-                label: Text('Alone'),
+                label: Text('Alone'), 
               ),
               // Button 2
               ElevatedButton.icon(
                 onPressed: () {
                   // Go to the Anniversary screen
                   Navigator.pushNamed(context, '/anniversary');
-                },
+                },        
                 icon: Icon(Icons.cake_rounded),
                 label: Text('Anniversary'),
               ),
@@ -206,14 +290,21 @@ class Others extends StatelessWidget {
                 label: Text('Birthday'),
               ),
               // Button 5
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Fitness screen
-                  Navigator.pushNamed(context, '/fitness');
-                },
-                icon: Icon(Icons.fitness_center),
-                label: Text('Fitness'),
+              SizedBox(
+                height: 40,
+                width: 60,
+                
+                child:
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Go to the Fitness screen
+                    Navigator.pushNamed(context, '/fitness');
+                  },
+                  icon: Icon(Icons.fitness_center),
+                  label: Text('Fitness'),
+                ),
               ),
+
               // Button 6
               ElevatedButton.icon(
                 onPressed: () {
@@ -261,16 +352,14 @@ class Others extends StatelessWidget {
               ),
               // Button 11
               ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Relationship screen
+                onPressed: () { // Go to the Relationship screen
                   Navigator.pushNamed(context, '/relationship');
                 },
                 icon: Icon(Icons.heart_broken),
-                label: Text('Relationship'),
-              )
-
-            ]
-        )
+                label: const Text('Relationship'),
+                ),
+                    ]
+        ) 
     );
 
 
