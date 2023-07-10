@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:motivationalquotesapp/contactus.dart';
+import 'package:motivationalquotesapp/downloads.dart';
+import 'package:motivationalquotesapp/faqpage.dart';
+import 'package:motivationalquotesapp/favourites.dart';
+import 'package:motivationalquotesapp/imagedetails.dart';
+import 'package:motivationalquotesapp/mycreations.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
 import 'package:motivationalquotesapp/screens/categories/anniversary.dart';
 import 'package:motivationalquotesapp/screens/categories/attitude.dart';
@@ -13,6 +19,7 @@ import 'package:motivationalquotesapp/screens/categories/relationship.dart';
 // import 'package:motivationalquotesapp/screens/Others.dart';
 import 'package:motivationalquotesapp/screens/home.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
+import 'package:motivationalquotesapp/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +35,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context){
     return  MaterialApp(
       routes: {
+        
+        '/creations':(context)=>creations(),
+        '/settings':(context)=>SettingsPage(),
+         '/faq':(context)=>FAQPage(),
+        '/downloads':(context)=>downloads(),
+        '/favourites':(context)=>favourites(),
+        '/contactus':(context)=>ContactUsPage(),
+        '/faqpage':(context)=>FAQPage(),
         '/premiumfeatures':(context)=>premiumFeatures(),
         '/others':(context)=>Others(),
         '/relationship':(context)=>relationship(),

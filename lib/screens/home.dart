@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:motivationalquotesapp/imagedetails.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 // import 'package:motivationalquotesapp/screens/Others.dart';
@@ -10,6 +11,7 @@ class home extends StatefulWidget {
   @override
   State<home> createState() => _homeState();
 }
+
 final List list = [
   "assets/images/motivational/1.jpg",
   "assets/images/motivational/2.jpg",
@@ -62,20 +64,20 @@ final List list = [
 class _homeState extends State<home> {
   double buttonSize = 20;
   int _currentScreen = 0;
-  List shuffledList=[];
+  List shuffledList = [];
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     shuffledList = list..shuffle();
   }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-
       appBar: appBar(),
-      drawer:  Drawer(child: ListView(
+      drawer: Drawer(
+          child: ListView(
         padding: EdgeInsets.zero,
         children: [
           // Header
@@ -105,7 +107,7 @@ class _homeState extends State<home> {
             title: Text('My Creations'),
             onTap: () {
               // Navigate to the my creations screen
-              Navigator.pushNamed(context, '/my-creations');
+              Navigator.pushNamed(context, '/creations');
             },
           ),
           ListTile(
@@ -121,7 +123,7 @@ class _homeState extends State<home> {
             title: Text('Favorites'),
             onTap: () {
               // Navigate to the favorites screen
-              Navigator.pushNamed(context, '/favorites');
+              Navigator.pushNamed(context, '/favourites');
             },
           ),
           Divider(),
@@ -152,10 +154,7 @@ class _homeState extends State<home> {
           ),
           // Your other drawer items
         ],
-      )
-      ),
-
-      
+      )),
       body: IndexedStack(
         index: _currentScreen,
         children: [
@@ -164,33 +163,43 @@ class _homeState extends State<home> {
         ],
       ),
     );
-
   }
 
   Widget grid() {
     return GestureDetector(
+
       child: GridView.count(
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
         primary: false,
         padding: const EdgeInsets.all(20),
-        crossAxisCount: 2,                   
-        children: list
-            .map((e) => ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  e,              
-                  fit: BoxFit.fitHeight,
-                )))
+        crossAxisCount: 2,
+        children:  list
+            .map((e) => GestureDetector(
+          onTap: () {
+            // This will open the new screen with the image and icons.
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ImageDetailsScreen(imagePath: e)));
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              e,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+        ))
             .toList(),
       ),
     );
   }
 
-
   AppBar appBar() {
     return AppBar(
-      elevation: 10, 
+      elevation: 10,
       shadowColor: Colors.black,
       systemOverlayStyle:
           SystemUiOverlayStyle(statusBarColor: Colors.transparent),
@@ -213,11 +222,11 @@ class _homeState extends State<home> {
                         : Colors.black),
               )),
           TextButton(
-              onPressed: () { 
+              onPressed: () {
                 setState(() {
                   _currentScreen = 1;
                 });
-              },            
+              },
               child: Text(
                 "Others",
                 style: TextStyle(
@@ -227,17 +236,14 @@ class _homeState extends State<home> {
                         : Colors.black),
               )),
           IconButton(
-            icon: Icon(Icons.attach_money, size:30),
+            icon: Icon(Icons.attach_money, size: 30),
             onPressed: () {
-              print("Pushed") ;
+              print("Pushed");
               Navigator.pushNamed(context, '/premiumfeatures');
-
             },
-
           ),
         ],
       ),
-      
     );
   }
 }
@@ -247,122 +253,116 @@ class Others extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-        GridView.count(
-          padding: EdgeInsets.all(10),
+        body: GridView.count(
+            padding: EdgeInsets.all(10),
             crossAxisCount: 2,
             children: [
-              // Button 1
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Alone screen
-                  // Navigator.pushNamed(context, '/alone');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => alone()));
-                },
-                icon: Icon(Icons.person_outline),
-                label: Text('Alone'), 
-              ),
-              // Button 2
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Anniversary screen
-                  Navigator.pushNamed(context, '/anniversary');
-                },        
-                icon: Icon(Icons.cake_rounded),
-                label: Text('Anniversary'),
-              ),
-              // Button 3
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Attitude screen
-                  Navigator.pushNamed(context, '/attitude');
-                },
-                icon: Icon(Icons.mood),
-                label: Text('Attitude'),
-              ),
-              // Button 4
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Birthday screen
-                  Navigator.pushNamed(context, '/birthday');
-                },
-                icon: Icon(Icons.cake_outlined),
-                label: Text('Birthday'),
-              ),
-              // Button 5
-              SizedBox(
-                height: 40,
-                width: 60,
-                
-                child:
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Go to the Fitness screen
-                    Navigator.pushNamed(context, '/fitness');
-                  },
-                  icon: Icon(Icons.fitness_center),
-                  label: Text('Fitness'),
-                ),
-              ),
+          // Button 1
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Alone screen
+              // Navigator.pushNamed(context, '/alone');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => alone()));
+            },
+            icon: Icon(Icons.person_outline),
+            label: Text('Alone'),
+          ),
+          // Button 2
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Anniversary screen
+              Navigator.pushNamed(context, '/anniversary');
+            },
+            icon: Icon(Icons.cake_rounded),
+            label: Text('Anniversary'),
+          ),
+          // Button 3
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Attitude screen
+              Navigator.pushNamed(context, '/attitude');
+            },
+            icon: Icon(Icons.mood),
+            label: Text('Attitude'),
+          ),
+          // Button 4
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Birthday screen
+              Navigator.pushNamed(context, '/birthday');
+            },
+            icon: Icon(Icons.cake_outlined),
+            label: Text('Birthday'),
+          ),
+          // Button 5
+          SizedBox(
+            height: 40,
+            width: 60,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                // Go to the Fitness screen
+                Navigator.pushNamed(context, '/fitness');
+              },
+              icon: Icon(Icons.fitness_center),
+              label: Text('Fitness'),
+            ),
+          ),
 
-              // Button 6
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Friendship screen
-                  Navigator.pushNamed(context, '/friendship');
-                },
-                icon: Icon(Icons.people_alt),
-                label: Text('Friendship'),
-              ),
-              // Button 7
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Good morning screen
-                  Navigator.pushNamed(context, '/good_morning');
-                },
-                icon: Icon(Icons.sunny),
-                label: Text('Good morning'),
-              ),
-              // Button 8
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Good night screen
-                  Navigator.pushNamed(context, '/good_night');
-                },
-                icon: Icon(Icons.nightlight),
-                label: Text('Good night'),
-              ),
-              // Button 9
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Love screen
-                  Navigator.pushNamed(context, '/love');
-                },
-                icon: Icon(Icons.favorite),
-                label: Text('Love'),
-              ),
-              // Button 10
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Go to the Positive screen
-                  Navigator.pushNamed(context, '/positive');
-                },
-                icon: Icon(Icons.sentiment_satisfied),
-                label: Text('Positive'),
-              ),
-              // Button 11
-              ElevatedButton.icon(
-                onPressed: () { // Go to the Relationship screen
-                  Navigator.pushNamed(context, '/relationship');
-                },
-                icon: Icon(Icons.heart_broken),
-                label: const Text('Relationship'),
-                ),
-                    ]
-        ) 
-    );
-
-
+          // Button 6
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Friendship screen
+              Navigator.pushNamed(context, '/friendship');
+            },
+            icon: Icon(Icons.people_alt),
+            label: Text('Friendship'),
+          ),
+          // Button 7
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Good morning screen
+              Navigator.pushNamed(context, '/good_morning');
+            },
+            icon: Icon(Icons.sunny),
+            label: Text('Good morning'),
+          ),
+          // Button 8
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Good night screen
+              Navigator.pushNamed(context, '/good_night');
+            },
+            icon: Icon(Icons.nightlight),
+            label: Text('Good night'),
+          ),
+          // Button 9
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Love screen
+              Navigator.pushNamed(context, '/love');
+            },
+            icon: Icon(Icons.favorite),
+            label: Text('Love'),
+          ),
+          // Button 10
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Positive screen
+              Navigator.pushNamed(context, '/positive');
+            },
+            icon: Icon(Icons.sentiment_satisfied),
+            label: Text('Positive'),
+          ),
+          // Button 11
+          ElevatedButton.icon(
+            onPressed: () {
+              // Go to the Relationship screen
+              Navigator.pushNamed(context, '/relationship');
+            },
+            icon: Icon(Icons.heart_broken),
+            label: const Text('Relationship'),
+          ),
+        ]));
   }
 }
-           
