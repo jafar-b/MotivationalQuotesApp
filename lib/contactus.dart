@@ -4,13 +4,11 @@ class ContactUsPage extends StatefulWidget {
   @override
   _ContactUsPageState createState() => _ContactUsPageState();
 }
-
 class _ContactUsPageState extends State<ContactUsPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController whatsappController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +49,6 @@ class _ContactUsPageState extends State<ContactUsPage> {
               child: ElevatedButton(
                 child: Text('Submit',style: TextStyle(fontSize: 20),),
                 onPressed: () {
-                  //TODO: Send the contact information to the server
                 },
               ),
             ),

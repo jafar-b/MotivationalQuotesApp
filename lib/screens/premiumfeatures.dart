@@ -85,7 +85,6 @@ class premiumFeatures extends StatelessWidget {
                   Navigator.pushNamed(context, '/faqpage');
                 },
                     child: const Center( widthFactor: 5, child: Text('FAQ',style: TextStyle(color: Colors.black)))),
-
               ),
               Container(
                 height: 50,

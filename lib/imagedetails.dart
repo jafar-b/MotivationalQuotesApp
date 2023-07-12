@@ -1,43 +1,32 @@
 import 'package:flutter/material.dart';
 
-
 class ImageDetailsScreen extends StatefulWidget {
   final String imagePath;
-  bool isFavourited=false;
-   ImageDetailsScreen({Key? key, required this.imagePath}) : super(key: key);
-
+  bool isFavourited = false;
+  ImageDetailsScreen({Key? key, required this.imagePath}) : super(key: key);
   @override
   State<ImageDetailsScreen> createState() => _ImageDetailsScreenState();
 }
-
 class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
-
   @override
   Widget build(BuildContext context) {
-    
-    var isFavourited=false;
+    var isFavourited = false;
     return Scaffold(
       appBar: AppBar(
         title: Text('Image Details'),
       ),
       body: Center(
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
-
           children: [
             Image.asset(
               width: double.infinity,
               widget.imagePath,
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-
                 SizedBox(
-
                   width: 20,
                 ),
                 IconButton(
@@ -46,9 +35,7 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
                   onPressed: () {},
                 ),
                 SizedBox(
-
                   width: 30,
-
                 ),
                 IconButton(
                   icon: Icon(Icons.share),
@@ -59,23 +46,21 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
                   width: 30,
                 ),
                 IconButton(
-                  icon: isFavourited ? Icon(Icons.favorite) : Icon(Icons.favorite_outline_outlined),
+                  icon: isFavourited
+                      ? Icon(Icons.favorite)
+                      : Icon(Icons.favorite_outline),
                   iconSize: 40,
                   onPressed: () {
                     setState(() {
-                      isFavourited = true;
+                      isFavourited = !isFavourited;
                     });
                   },
                 ),
               ],
             ),
-
           ],
         ),
       ),
     );
   }
-
-  }
-                  // isFavourited ? Icon(Icons.favorite) : Icon(Icons.favorite_outline_outlined),
-
+}

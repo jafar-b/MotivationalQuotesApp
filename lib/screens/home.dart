@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:motivationalquotesapp/imagedetails.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
+import 'package:motivationalquotesapp/screens/categories/anniversary.dart';
+import 'package:motivationalquotesapp/screens/categories/attitude.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 // import 'package:motivationalquotesapp/screens/Others.dart';
 
@@ -99,7 +101,7 @@ class _homeState extends State<home> {
             title: Text('Create Quote'),
             onTap: () {
               // Navigate to the create quote screen
-              Navigator.pushNamed(context, '/create-quote');
+              Navigator.pushNamed(context, '/createquote');
             },
           ),
           ListTile(
@@ -167,7 +169,6 @@ class _homeState extends State<home> {
 
   Widget grid() {
     return GestureDetector(
-
       child: GridView.count(
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
@@ -235,10 +236,10 @@ class _homeState extends State<home> {
                         ? Colors.deepPurpleAccent
                         : Colors.black),
               )),
-          IconButton(
+          IconButton(                       
             icon: Icon(Icons.attach_money, size: 30),
             onPressed: () {
-              print("Pushed");
+            
               Navigator.pushNamed(context, '/premiumfeatures');
             },
           ),
@@ -263,7 +264,7 @@ class Others extends StatelessWidget {
               // Go to the Alone screen
               // Navigator.pushNamed(context, '/alone');
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => alone()));
+                  context, MaterialPageRoute(builder: (context) => alone(context)));
             },
             icon: Icon(Icons.person_outline),
             label: Text('Alone'),
@@ -271,8 +272,10 @@ class Others extends StatelessWidget {
           // Button 2
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Anniversary screen
-              Navigator.pushNamed(context, '/anniversary');
+              // Go to the Alone screen
+              // Navigator.pushNamed(context, '/alone');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => anniversary(context)));
             },
             icon: Icon(Icons.cake_rounded),
             label: Text('Anniversary'),
@@ -280,8 +283,10 @@ class Others extends StatelessWidget {
           // Button 3
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Attitude screen
-              Navigator.pushNamed(context, '/attitude');
+              // Go to the Alone screen
+              // Navigator.pushNamed(context, '/alone');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => attitude()));
             },
             icon: Icon(Icons.mood),
             label: Text('Attitude'),
