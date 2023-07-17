@@ -4,7 +4,6 @@ import 'package:motivationalquotesapp/createquote.dart';
 import 'package:motivationalquotesapp/downloads.dart';
 import 'package:motivationalquotesapp/faqpage.dart';
 import 'package:motivationalquotesapp/favourites.dart';
-import 'package:motivationalquotesapp/imagedetails.dart';
 import 'package:motivationalquotesapp/mycreations.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
 import 'package:motivationalquotesapp/screens/categories/anniversary.dart';
@@ -17,10 +16,10 @@ import 'package:motivationalquotesapp/screens/categories/goodnight.dart';
 import 'package:motivationalquotesapp/screens/categories/love.dart';
 import 'package:motivationalquotesapp/screens/categories/positive.dart';
 import 'package:motivationalquotesapp/screens/categories/relationship.dart';
-// import 'package:motivationalquotesapp/screens/Others.dart';
 import 'package:motivationalquotesapp/screens/home.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 import 'package:motivationalquotesapp/settings.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -54,7 +53,8 @@ class _MyAppState extends State<MyApp> {
         '/positive': (context) => positive(),
         '/anniversary': (context) => anniversary(context),
         '/alone': (context) => alone(context),
-        '/createquote': (context) => createquote(),
+        '/createquote': (context) => CreateQuote(),
+        
       },
       title: 'Motivational Quotes',
       debugShowCheckedModeBanner: false,

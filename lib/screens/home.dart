@@ -83,7 +83,7 @@ class _homeState extends State<home> {
         padding: EdgeInsets.zero,
         children: [
           // Header
-          DrawerHeader(
+         const DrawerHeader(
             child: Center(
               child: Text(
                 'Motivational Quotes     -Jafar',
@@ -167,6 +167,7 @@ class _homeState extends State<home> {
     );
   }
 
+
   Widget grid() {
     return GestureDetector(
       child: GridView.count(
@@ -239,7 +240,6 @@ class _homeState extends State<home> {
           IconButton(                       
             icon: Icon(Icons.attach_money, size: 30),
             onPressed: () {
-            
               Navigator.pushNamed(context, '/premiumfeatures');
             },
           ),

@@ -110,7 +110,6 @@ class sad extends StatelessWidget {
         leading: BackButton(onPressed: (){
           Navigator.pop(context);
         },),elevation: 5,title: Text("Sad"),
-
       ) ,
       body:grid(context),
     );
@@ -122,7 +121,7 @@ Widget grid(BuildContext context) {
   return GestureDetector(
 
     child: GridView.count(
-      crossAxisSpacing: 20,
+      crossAxisSpacing: 20,              
       mainAxisSpacing: 20,
       primary: false,
       padding: const EdgeInsets.all(20),

@@ -58,21 +58,26 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             title: Text('Privacy Policy'),
             onTap: () {
-
+              var snackBar = SnackBar(content: Text('The app is in development therefore no privacy policy.'));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              
             },
             trailing: Icon(Icons.arrow_right),
           ),
           ListTile(
             title: Text('Share App'),
             onTap: () {
-              
+              var snackBar = SnackBar(content: Text('The app is in development.'));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               //TODO: Implement share app feature
             },
             trailing: Icon(Icons.share),
           ),
           ListTile(
             title: Text('Rate App'),
-            onTap: () {
+            onTap: () {  var snackBar = SnackBar(content: Text('The app is in development.'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
               //TODO: Implement rate app feature
             },
             trailing: Icon(Icons.star),
