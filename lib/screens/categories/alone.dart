@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:motivationalquotesapp/imagedetails.dart';
 
@@ -98,10 +100,35 @@ final List list = [
   "assets/images/motivational/46.jpg"
 ];
 
-class alone extends StatelessWidget {
+class alone extends StatefulWidget {
+   alone(BuildContext context,{Key? key}) : super(key: key);
+
+  @override
+  State<alone> createState() => _aloneState();
+}
+
+class _aloneState extends State<alone> {
+  late String imageUrl;
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  final storageRef = FirebaseStorage.instance.ref();
+  void initState(){
+    super.initState();
+    Firebase.initializeApp();
+    imageUrl='';
+    getImageUrl();
+    
+  }
+
+  Future <void> getImageUrl()async {
+        final ref=storage.ref().child('1.jpg');
+        final url=await ref.getDownloadURL();
+        setState(() {
+          imageUrl=url;
+        });
+  }
 
 
-  const alone(BuildContext context,{Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,42 +136,56 @@ class alone extends StatelessWidget {
         leading: BackButton(onPressed: (){
           Navigator.pop(context);
         },),elevation: 5,title: Text("Alone"),
-        
+
       ) ,
           body:grid(context) ,
       );
   }
-}
 
 
 Widget grid(BuildContext context) {
   return GestureDetector(
-
     child: GridView.count(
       crossAxisSpacing: 20,
       mainAxisSpacing: 20,
       primary: false,
       padding: const EdgeInsets.all(20),
       crossAxisCount: 2,
-      children:  list
-          .map((e) => GestureDetector(
-        onTap: () {
-          // This will open the new screen with the image and icons.
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ImageDetailsScreen(imagePath: e)));
-        },
-        child: ClipRRect(
+      // children:  list
+      //     .map((e) => GestureDetector(
+      //   onTap: () {
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //             builder: (context) =>
+      //                 ImageDetailsScreen(imagePath: e)));
+      //   },
+      //   child: ClipRRect(
+      //     borderRadius: BorderRadius.circular(10),
+      //     child: Image.network(imageUrl)
+      //   ),
+      // )
+      // )
+      //     .toList(),
+
+    children: [ GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ImageDetailsScreen(imagePath: imageUrl)));
+      },
+      child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            e,
-            fit: BoxFit.fitHeight,
-          ),
-        ),
-      ))
-          .toList(),
+          child: Image.network(imageUrl)
+      ),
+    )
+
+
+    ],
+
     ),
   );
+}
 }

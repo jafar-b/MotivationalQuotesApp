@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  favorite_button:
+    dependency: "direct main"
+    description:
+      name: favorite_button
+      sha256: b7533330b7e5592567c4cce5f475ecc19ef1e77aa48c77f43726f7b8150a3e2c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   ffi:
     dependency: transitive
     description:
@@ -146,7 +154,7 @@ packages:
     source: hosted
     version: "0.9.3"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       sha256: "2e9324f719e90200dc7d3c4f5d2abc26052f9f2b995d3b6626c47a0dfe1c8192"

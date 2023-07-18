@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:motivationalquotesapp/contactus.dart';
 import 'package:motivationalquotesapp/createquote.dart';
@@ -20,7 +21,9 @@ import 'package:motivationalquotesapp/screens/home.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 import 'package:motivationalquotesapp/settings.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 class MyApp extends StatefulWidget {
