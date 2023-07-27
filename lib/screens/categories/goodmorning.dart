@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:motivationalquotesapp/imagedetails.dart';
 
+import '../../firebaseconfig.dart';
+
 final List list = [
   "assets/images/motivational/1.jpg",
   "assets/images/motivational/2.jpg",
@@ -98,8 +100,23 @@ final List list = [
 //   "assets/images/alone/45.jpg",
 //   "assets/images/alone/46.jpg"
 // ];
-class goodmorning extends StatelessWidget {
+class goodmorning extends StatefulWidget {
   const goodmorning({Key? key}) : super(key: key);
+
+  @override
+  State<goodmorning> createState() => _goodmorningState();
+}
+
+class _goodmorningState extends State<goodmorning> {
+
+  var ff = firebaseconfig();
+  List<String> imageUrls = [];
+
+  @override
+  void initState() {
+    super.initState();
+    ff.fetchImages();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,40 +126,43 @@ class goodmorning extends StatelessWidget {
         },),elevation: 5,title: Text("Goodmorning"),
 
       ) ,
-      body:grid(context),
+      body:FutureBuilder<List<String>>(
+        future: ff.fetchImages(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
+            imageUrls = snapshot.data!;
+            return GridView.count(
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              primary: false,
+              padding: const EdgeInsets.all(20),
+              crossAxisCount: 2,
+              children:
+              imageUrls.map((e) =>
+                  GestureDetector(
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ImageDetailsScreen(imagePath: e)));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(e),
+                    ),
+                  )
+              ).toList(),
+            );
+          } else {
+            return Center(child: Text("No data found"));
+          }
+        },
+      )
     );
   }
 }
 
 
-Widget grid(BuildContext context) {
-  return GestureDetector(
-
-    child: GridView.count(
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 20,
-      primary: false,
-      padding: const EdgeInsets.all(20),
-      crossAxisCount: 2,
-      children:  list
-          .map((e) => GestureDetector(
-        onTap: () {
-          // This will open the new screen with the image and icons.
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ImageDetailsScreen(imagePath: e)));
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            e,
-            fit: BoxFit.fitHeight,
-          ),
-        ),
-      ))
-          .toList(),
-    ),
-  );
-}

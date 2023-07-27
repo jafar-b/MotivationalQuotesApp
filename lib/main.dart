@@ -1,10 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:motivationalquotesapp/contactus.dart';
 import 'package:motivationalquotesapp/createquote.dart';
 import 'package:motivationalquotesapp/downloads.dart';
 import 'package:motivationalquotesapp/faqpage.dart';
 import 'package:motivationalquotesapp/favourites.dart';
+import 'package:motivationalquotesapp/firebase_options.dart';
+import 'package:motivationalquotesapp/imagesController.dart';
 import 'package:motivationalquotesapp/mycreations.dart';
 import 'package:motivationalquotesapp/screens/categories/alone.dart';
 import 'package:motivationalquotesapp/screens/categories/anniversary.dart';
@@ -22,11 +27,17 @@ import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 import 'package:motivationalquotesapp/settings.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
   runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+
 }
 class MyApp extends StatefulWidget {
+  
   const MyApp({super.key});
   @override
   State<MyApp> createState() => _MyAppState();
@@ -34,8 +45,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       routes: {
+        
         '/creations': (context) => creations(),
         '/settings': (context) => SettingsPage(),
         '/faq': (context) => FAQPage(),
@@ -57,8 +71,8 @@ class _MyAppState extends State<MyApp> {
         '/anniversary': (context) => anniversary(context),
         '/alone': (context) => alone(context),
         '/createquote': (context) => CreateQuote(),
-        
       },
+
       title: 'Motivational Quotes',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

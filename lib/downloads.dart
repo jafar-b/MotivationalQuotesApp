@@ -7,7 +7,6 @@ final List list = [
 
 class downloads extends StatelessWidget {
   const downloads({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,6 +5,8 @@ import 'package:motivationalquotesapp/screens/categories/alone.dart';
 import 'package:motivationalquotesapp/screens/categories/anniversary.dart';
 import 'package:motivationalquotesapp/screens/categories/attitude.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
+
+import '../firebaseconfig.dart';
 // import 'package:motivationalquotesapp/screens/Others.dart';
 
 class home extends StatefulWidget {
@@ -13,65 +15,19 @@ class home extends StatefulWidget {
   @override
   State<home> createState() => _homeState();
 }
-
-final List list = [
-  "assets/images/motivational/1.jpg",
-  "assets/images/motivational/2.jpg",
-  "assets/images/motivational/3.jpg",
-  "assets/images/motivational/4.jpg",
-  "assets/images/motivational/6.jpg",
-  "assets/images/motivational/5.jpg",
-  "assets/images/motivational/7.jpg",
-  "assets/images/motivational/8.jpg",
-  "assets/images/motivational/9.jpg",
-  "assets/images/motivational/10.jpg",
-  "assets/images/motivational/11.jpg",
-  "assets/images/motivational/12.jpg",
-  "assets/images/motivational/13.jpg",
-  "assets/images/motivational/14.jpg",
-  "assets/images/motivational/15.jpg",
-  "assets/images/motivational/16.jpg",
-  "assets/images/motivational/17.jpg",
-  "assets/images/motivational/18.jpg",
-  "assets/images/motivational/19.jpg",
-  "assets/images/motivational/20.jpg",
-  "assets/images/motivational/21.jpg",
-  "assets/images/motivational/22.jpg",
-  "assets/images/motivational/23.jpg",
-  "assets/images/motivational/24.jpg",
-  "assets/images/motivational/25.jpg",
-  "assets/images/motivational/26.jpg",
-  "assets/images/motivational/27.jpg",
-  "assets/images/motivational/28.jpg",
-  "assets/images/motivational/29.jpg",
-  "assets/images/motivational/30.jpg",
-  "assets/images/motivational/31.jpg",
-  "assets/images/motivational/32.jpg",
-  "assets/images/motivational/33.jpg",
-  "assets/images/motivational/34.jpg",
-  "assets/images/motivational/35.jpg",
-  "assets/images/motivational/36.jpg",
-  "assets/images/motivational/37.jpg",
-  "assets/images/motivational/38.jpg",
-  "assets/images/motivational/39.jpg",
-  "assets/images/motivational/40.jpg",
-  "assets/images/motivational/42.jpg",
-  "assets/images/motivational/41.jpg",
-  "assets/images/motivational/43.jpg",
-  "assets/images/motivational/44.jpg",
-  "assets/images/motivational/45.jpg",
-  "assets/images/motivational/46.jpg"
-];
-
 class _homeState extends State<home> {
   double buttonSize = 20;
   int _currentScreen = 0;
-  List shuffledList = [];
-
+  List<String>imageUrls=[];
+  var ff=firebaseconfig();
   @override
   void initState() {
     super.initState();
-    shuffledList = list..shuffle();
+    ff.fetchImages().then((List<String> list) =>{
+      setState((){
+        imageUrls=list;
+      })
+    } );
   }
 
   @override
@@ -170,32 +126,29 @@ class _homeState extends State<home> {
 
   Widget grid() {
     return GestureDetector(
-      child: GridView.count(
+      child:  GridView.count(
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
         primary: false,
         padding: const EdgeInsets.all(20),
         crossAxisCount: 2,
-        children:  list
-            .map((e) => GestureDetector(
-          onTap: () {
-            // This will open the new screen with the image and icons.
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ImageDetailsScreen(imagePath: e)));
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              e,
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-        ))
-            .toList(),
-      ),
+        children:
+        imageUrls.map((e) =>
+            GestureDetector(
+              onTap: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ImageDetailsScreen(imagePath:e)));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(e),
+              ),
+            )
+        ).toList(),
+      )
     );
   }
 
@@ -254,15 +207,14 @@ class Others extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GridView.count(
+        body:
+        GridView.count(
             padding: EdgeInsets.all(10),
             crossAxisCount: 2,
             children: [
           // Button 1
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Alone screen
-              // Navigator.pushNamed(context, '/alone');
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => alone(context)));
             },
@@ -313,7 +265,6 @@ class Others extends StatelessWidget {
               label: Text('Fitness'),
             ),
           ),
-
           // Button 6
           ElevatedButton.icon(
             onPressed: () {
@@ -368,6 +319,8 @@ class Others extends StatelessWidget {
             icon: Icon(Icons.heart_broken),
             label: const Text('Relationship'),
           ),
-        ]));
+        ]
+        )
+    );
   }
 }
