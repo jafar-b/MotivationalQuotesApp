@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' show get;
@@ -9,6 +11,8 @@ import 'package:share_plus/share_plus.dart';
 import 'firebaseconfig.dart';
 import 'package:screenshot/screenshot.dart';
 import 'dart:io';
+import 'dart:math';
+
 // import 'package:share_plus/share_plus.dart';
 
 
@@ -23,7 +27,7 @@ class ImageDetailsScreen extends StatefulWidget {
 class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
   ScreenshotController screenshotController = ScreenshotController();
   final ff = firebaseconfig();
-
+  var rng=Random().nextInt(999);
   @override
   void initState() {
     super.initState();
@@ -111,11 +115,25 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
 
     takeScreenShot() {
       _saved(Uint8List image) async {
-        final result = await ImageGallerySaver.saveImage(image);
-        //savefile(image as String, Random().nextInt(200) as String);
+        await ImageGallerySaver.saveImage(image);
+       try{
+          // Get the directory where the app's downloads are saved.
+          final Directory downloadsDirectory = await getApplicationDocumentsDirectory();
+          // Create a new directory inside the downloads directory to store the images.
+          final Directory imagesDirectory = Directory('${downloadsDirectory.path}/images');
+          imagesDirectory.create();
+
+          // Save the image in the images directory.
+          final File imageFile = File('${imagesDirectory.path}/${rng}.jpg');
+          imageFile.writeAsBytes(image);
+          print({"Stored the image in : ":imageFile.path});
+
+       }catch(E){
+                 print({"Error ": E});
+       }
+        }
         var snackBar = SnackBar(content: Text('Added to Gallery.'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
       screenshotController
           .capture(delay: const Duration(milliseconds: 10))
           .then((Uint8List? image) async {

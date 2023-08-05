@@ -1,12 +1,32 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:motivationalquotesapp/imagedetails.dart';
-final List list = [
-"assets/images/motivational/1.jpg",
-"assets/images/motivational/2.jpg",
-"assets/images/motivational/3.jpg",];
+import 'package:path_provider/path_provider.dart';
 
-class downloads extends StatelessWidget {
+final List list=[];
+class downloads extends StatefulWidget {
   const downloads({Key? key}) : super(key: key);
+  @override
+  State<downloads> createState() => _downloadsState();
+}
+
+class _downloadsState extends State<downloads> {
+  List list=[];
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void>getImages(List list)async{
+    final Directory downloadsDirectory=await getApplicationDocumentsDirectory();
+    final Directory imagesDirectory = Directory('${downloadsDirectory.path}/images');
+    final List<FileSystemEntity> images = imagesDirectory.listSync();
+    setState(() {
+      list=images;
+    });
+    print(list);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,45 +34,45 @@ class downloads extends StatelessWidget {
         leading: BackButton(onPressed: (){
           Navigator.pop(context);
         },),elevation: 5,title: Text("Downloads"),
-
       ) ,
-      body:grid(context) ,
+      body: GridView.count(
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        crossAxisCount: 2,
+        children:
+        list.map((e) =>
+            GestureDetector(
+              onTap: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ImageDetailsScreen(imagePath:e)));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(e),
+              ),
+            )
+        ).toList(),
+      )
     );
-
   }
 
   Widget grid(BuildContext context) {
-    return GestureDetector(
-
+   return GestureDetector(
       child: GridView.count(
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
         primary: false,
         padding: const EdgeInsets.all(20),
         crossAxisCount: 2,
-        children:  list
-            .map((e) => GestureDetector(
-          onTap: () {
-            // This will open the new screen with the image and icons.
-            Navigator.push(
-               context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ImageDetailsScreen(imagePath: e)));
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              e,
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-        ))
-            .toList(),
+        children:list.map((e) => const Text("Hello world"),
+        ).toList(),
+        
       ),
     );
   }
-
-
-
 }
