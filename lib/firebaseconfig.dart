@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
 class firebaseconfig {
+
   var db = FirebaseFirestore.instance;
   late String docId = "";
   var rng = Random();

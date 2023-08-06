@@ -28,6 +28,7 @@ dependencies:
   get: ^4.6.5
   firebase_app_check: ^0.1.5+1
   cloud_firestore: ^4.8.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

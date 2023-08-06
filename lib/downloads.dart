@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:motivationalquotesapp/imagedetails.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:motivationalquotesapp/downloadedimagedetails.dart';
 import 'package:path_provider/path_provider.dart';
 
-final List list=[];
+List list=[];
 class downloads extends StatefulWidget {
   const downloads({Key? key}) : super(key: key);
   @override
@@ -11,13 +13,14 @@ class downloads extends StatefulWidget {
 }
 
 class _downloadsState extends State<downloads> {
-  List list=[];
+
   @override
   void initState() {
     super.initState();
+    getImages();
   }
 
-  Future<void>getImages(List list)async{
+  Future<List<FileSystemEntity>>getImages()async{
     final Directory downloadsDirectory=await getApplicationDocumentsDirectory();
     final Directory imagesDirectory = Directory('${downloadsDirectory.path}/images');
     final List<FileSystemEntity> images = imagesDirectory.listSync();
@@ -25,8 +28,9 @@ class _downloadsState extends State<downloads> {
       list=images;
     });
     print(list);
+    return images;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,14 @@ class _downloadsState extends State<downloads> {
           Navigator.pop(context);
         },),elevation: 5,title: Text("Downloads"),
       ) ,
-      body: GridView.count(
+      body:grid(context),
+    );
+  }
+    }
+
+  Widget grid(BuildContext context) {
+   return GestureDetector(
+      child: list!=[]? GridView.count(
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
         primary: false,
@@ -53,26 +64,33 @@ class _downloadsState extends State<downloads> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(e),
+                child: Image.file(e),
               ),
             )
         ).toList(),
-      )
-    );
-  }
-
-  Widget grid(BuildContext context) {
-   return GestureDetector(
-      child: GridView.count(
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisCount: 2,
-        children:list.map((e) => const Text("Hello world"),
-        ).toList(),
-        
+      ) :
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'You have no downloads.',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Explore more to find something to download.',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              child: Text('Explore More'),
+            ),
+          ],
+        ),
       ),
     );
   }
-}

@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+
 import 'package:motivationalquotesapp/contactus.dart';
 import 'package:motivationalquotesapp/createquote.dart';
 import 'package:motivationalquotesapp/downloads.dart';
@@ -25,16 +23,11 @@ import 'package:motivationalquotesapp/screens/categories/relationship.dart';
 import 'package:motivationalquotesapp/screens/home.dart';
 import 'package:motivationalquotesapp/screens/premiumfeatures.dart';
 import 'package:motivationalquotesapp/settings.dart';
-
-void main() async{
-
-  runApp(const MyApp());
+import 'package:firebase_core/firebase_core.dart';
+Future <void>main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-
+  await Firebase.initializeApp( );
+  runApp(MyApp());
 }
 class MyApp extends StatefulWidget {
   
@@ -49,8 +42,9 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       routes: {
-        
+
         '/creations': (context) => creations(),
+        '/home': (context) => home(),
         '/settings': (context) => SettingsPage(),
         '/faq': (context) => FAQPage(),
         '/downloads': (context) => downloads(),

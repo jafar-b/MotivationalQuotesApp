@@ -27,7 +27,7 @@ class ImageDetailsScreen extends StatefulWidget {
 class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
   ScreenshotController screenshotController = ScreenshotController();
   final ff = firebaseconfig();
-  var rng=Random().nextInt(999);
+  var rng=Random().nextInt(999999);
   @override
   void initState() {
     super.initState();
@@ -46,12 +46,12 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
                   controller: screenshotController,
                   child: Container(
                     color: Colors.white,
-                    child:
+                    child: Image.network(widget.imagePath),
                     // Image.asset(
                     //   width: double.infinity,
                     //   widget.imagePath,
                     // ),
-                    Image.network(widget.imagePath),
+
                   )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -71,9 +71,6 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
                     icon: Icon(Icons.share),
                     iconSize: 40,
                     onPressed: () async {
-
-
-
                        final imgUrl=widget.imagePath;
                        final Uri url=Uri.parse(imgUrl);
                        final response =await get(url);
@@ -141,7 +138,7 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
       });
     }
 
-  
+
 
 
 }
