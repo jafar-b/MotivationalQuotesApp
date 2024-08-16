@@ -89,16 +89,14 @@ class _homeState extends State<home> {
             leading: Icon(Icons.facebook),
             title: Text('Like us on Facebook'),
             onTap: () {
-              // Open the Facebook page in the browser
-              // TODO: Implement this
+             
             },
           ),
           ListTile(
             leading: Icon(Icons.facebook),
             title: Text('Follow us on Instagram'),
             onTap: () {
-              // Open the Instagram page in the browser
-              // TODO: Implement this
+             
             },
           ),
           Divider(),
@@ -110,7 +108,7 @@ class _homeState extends State<home> {
               Navigator.pushNamed(context, '/settings');
             },
           ),
-          // Your other drawer items
+          //  other drawer items
         ],
       )),
       body: IndexedStack(
@@ -212,7 +210,6 @@ class Others extends StatelessWidget {
             padding: EdgeInsets.all(10),
             crossAxisCount: 2,
             children: [
-          // Button 1
           ElevatedButton.icon(
             onPressed: () {
               Navigator.push(
@@ -221,10 +218,8 @@ class Others extends StatelessWidget {
             icon: Icon(Icons.person_outline),
             label: Text('Alone'),
           ),
-          // Button 2
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Alone screen
               // Navigator.pushNamed(context, '/alone');
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => anniversary(context)));
@@ -232,7 +227,7 @@ class Others extends StatelessWidget {
             icon: Icon(Icons.cake_rounded),
             label: Text('Anniversary'),
           ),
-          // Button 3
+        
           ElevatedButton.icon(
             onPressed: () {
               // Go to the Alone screen
@@ -243,77 +238,63 @@ class Others extends StatelessWidget {
             icon: Icon(Icons.mood),
             label: Text('Attitude'),
           ),
-          // Button 4
+          
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Birthday screen
               Navigator.pushNamed(context, '/birthday');
             },
             icon: Icon(Icons.cake_outlined),
             label: Text('Birthday'),
           ),
-          // Button 5
+          
           SizedBox(
             height: 40,
             width: 60,
             child: ElevatedButton.icon(
               onPressed: () {
-                // Go to the Fitness screen
                 Navigator.pushNamed(context, '/fitness');
               },
               icon: Icon(Icons.fitness_center),
               label: Text('Fitness'),
             ),
           ),
-          // Button 6
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Friendship screen
               Navigator.pushNamed(context, '/friendship');
             },
             icon: Icon(Icons.people_alt),
             label: Text('Friendship'),
           ),
-          // Button 7
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Good morning screen
               Navigator.pushNamed(context, '/good_morning');
             },
             icon: Icon(Icons.sunny),
             label: Text('Good morning'),
           ),
-          // Button 8
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Good night screen
               Navigator.pushNamed(context, '/good_night');
             },
             icon: Icon(Icons.nightlight),
             label: Text('Good night'),
           ),
-          // Button 9
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Love screen
               Navigator.pushNamed(context, '/love');
             },
             icon: Icon(Icons.favorite),
             label: Text('Love'),
           ),
-          // Button 10
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Positive screen
               Navigator.pushNamed(context, '/positive');
             },
             icon: Icon(Icons.sentiment_satisfied),
             label: Text('Positive'),
           ),
-          // Button 11
           ElevatedButton.icon(
             onPressed: () {
-              // Go to the Relationship screen
               Navigator.pushNamed(context, '/relationship');
             },
             icon: Icon(Icons.heart_broken),

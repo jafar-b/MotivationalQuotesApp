@@ -69,7 +69,6 @@ class _SettingsPageState extends State<SettingsPage> {
             onTap: () {
               var snackBar = SnackBar(content: Text('The app is in development.'));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              //TODO: Implement share app feature
             },
             trailing: Icon(Icons.share),
           ),
@@ -78,7 +77,6 @@ class _SettingsPageState extends State<SettingsPage> {
             onTap: () {  var snackBar = SnackBar(content: Text('The app is in development.'));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-              //TODO: Implement rate app feature
             },
             trailing: Icon(Icons.star),
           ),

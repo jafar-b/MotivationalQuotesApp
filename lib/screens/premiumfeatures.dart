@@ -42,7 +42,6 @@ class premiumFeatures extends StatelessWidget {
                     return premiumfeatdialogue();
                   });
 
-              // Show an alert dialogue with the premium feature of removing watermark.
             },
           ),
           TextButton(
@@ -54,7 +53,6 @@ class premiumFeatures extends StatelessWidget {
                     return premiumfeatdialogue();
                   });
 
-              // Show an alert dialogue with the premium feature of premium images.
             },
           ),
           TextButton(
@@ -66,7 +64,7 @@ class premiumFeatures extends StatelessWidget {
                     return premiumfeatdialogue();
                   });
 
-              // Show an alert dialogue with the premium feature of combo save(25%).
+              // Show an alert dialogue with the premium feature of combo save
             },
           ),
           TextButton(
@@ -79,7 +77,6 @@ class premiumFeatures extends StatelessWidget {
                   });
             },
           ),
-          // FAQ and Contact us buttons should be placed horizontally adjacent to each other
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

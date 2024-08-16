@@ -1,0 +1,87 @@
+MOTIVATIONAL QUOTES APP,,
+,,
+Dashboard:,,ACTION
+First Screen:,Permission,"(Accept,Deny)"
+,,
+if connected to Internet :,,Display Motivational Page
+Number of Screens:,,13
+,,
+,,
+,,
+,,
+Page,Features,Ads
+Motivational,Contains Navbar,Placed inside a random cell in the grid.(size : same as image card).
+,Images of motivational quotes placed in a scrollable grid (columns=2),"When a card is clicked, Ad in the form of a video is shown."
+,Create quote icon placed at bottom right ( on every screen),Ad placed at bottom
+,,
+Other page,Header,When navigating back from each category Ad is shown (Either video or simple ad).
+,Contains categories (Buttons) like:,Ad inside image card placed in grid.
+,Alone,
+,Anniversary,
+,Attitude,
+,Birthday,
+,Fitness,
+,Friendship,
+,Good morning,
+,Good Night,
+,Love,
+,Positive,
+,Relationship,
+,Sad,
+,Travel,
+,Each category Contains a grid of image cards.,
+,,
+Premium Page,No header,NO Ads
+,Buttons like:,
+,get 3 days free,
+,remove Ads,
+,remove watermark,
+,premium images,
+,combo save,
+,restore Purchase,
+,,
+,Paragraph containing instructions.,
+,"Buttons: FAQ, CONTACT US",
+,,
+Download Image Page,Image (with watermark),No Ads
+,Buttons/Icons (placed Inline),
+,favourite,
+,share,
+,Download Image,
+,,
+Navbar,Sliding Navbar(List),No Ads
+,contains options like,
+,Create Quote,
+,My creations,
+,favourites,
+,like on facebook,
+,follow on instagram,
+,settings,
+,,
+Create Quote,"Header Containing Icons : PremiumAdd custom watermark, download",No Ads
+,jmage to esit or add quote,
+,Horizontal scrollable carousel containing background images,
+,"Editing options like: Add Quote, background, font style, font color, shadow, overlay",
+,,
+My creations Page,Grid of useful image cards,No Ads
+,,
+Downloads,Grid of downloaded images,No Ads
+,,
+Settings,Options like: Tap sound (on/off),No Ads
+,notification,
+,FAQ,
+,contact us,
+,privact policy,
+,share app,
+,rate app,
+,,
+Contact Us page,Name,No Ads
+,Email,
+,whatsapp number(optional),
+,message,
+,submit button,
+,,
+FAQ page,List of expandable items(Questions),No Ads
+,,
+No internet connection Page,No Connection Symbol,No Ads
+,Try again button,
